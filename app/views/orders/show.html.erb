@@ -6,6 +6,33 @@
 
   <div class="order-summary jumbotron">
     <h4>Thank you for your order!</h4>
+
+    <% i = 0
+      
+        loop do
+          i = i + 1 
+          x = i - 1%>
+          
+
+          Plant ID: <%=@order.line_items[x].product_id%><br>
+          Plant Name: <%=Product.where("id = #{@order.line_items[x].product_id}")[0].name%><br>
+          <%= image_tag Product.where("id = #{@order.line_items[x].product_id}")[0].image.tiny.url%><br>
+          <%=Product.where("id = #{@order.line_items[x].product_id}")[0].description%><br>
+          Amount purchased: <%= @order.line_items[x].quantity%><br>
+          Cost: <%= ( humanized_money_with_symbol @order.line_items[x].quantity * @order.line_items[x].item_price_cents / 100.00) %><br><br>
+          
+      
+        
+          <%
+          if i == @order.line_items.length
+            break
+          end
+        end
+    %>
+
+    <br><br>
+    Order Total: <%=humanized_money_with_symbol @order.total_cents / 100.00%><br>
+    Order email: <%=@order.email%>
   </div>
 
   <%= link_to "Continue Shopping", root_path, class: 'btn btn-lg btn-primary' %>
