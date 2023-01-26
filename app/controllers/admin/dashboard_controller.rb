@@ -4,3 +4,4 @@ class Admin::DashboardController < ApplicationController
     @products = Product.all
   end
 end
+
