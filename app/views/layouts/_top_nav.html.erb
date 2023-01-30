@@ -32,6 +32,19 @@
             aria-expanded="false"
           > %>
             <li class="nav-item"><a class="nav-link" href="/about">About</a></li> 
+              <% if current_user %>
+                <li class="nav-item">
+                  <a class="nav-link">
+                    Signed in as <%= current_user.name %> | <%= link_to "Logout", '/logout' %>
+                  </a>
+                </li>
+              <% else %>
+                <li class="nav-item">
+                  <a class="nav-link">
+                    <%= link_to 'Login', '/login' %> | <%= link_to 'Signup', '/signup' %>
+                  </a>
+                </li>
+              <% end %>
             <%# Categories %>
           <%# </a>
           <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown"> %>
